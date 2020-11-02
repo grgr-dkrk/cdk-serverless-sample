@@ -1,0 +1,212 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`APIGatewayStack snapshot: apiGatewayTest 1`] = `
+Object {
+  "Outputs": Object {
+    "ApiGatewayTestApiGatewayStackEndpointAEE08830": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "ApiGatewayTestApiGatewayStack5C9F3E84",
+            },
+            ".execute-api.us-east-1.",
+            Object {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            Object {
+              "Ref": "ApiGatewayTestApiGatewayStackDeploymentStageprodF1D9D672",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
+  },
+  "Resources": Object {
+    "ApiGatewayTestApiGatewayStack5C9F3E84": Object {
+      "Properties": Object {
+        "Name": "myApi",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "ApiGatewayTestApiGatewayStackAccount78E2AC9D": Object {
+      "DependsOn": Array [
+        "ApiGatewayTestApiGatewayStack5C9F3E84",
+      ],
+      "Properties": Object {
+        "CloudWatchRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "ApiGatewayTestApiGatewayStackCloudWatchRole5FE8AFA8",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::Account",
+    },
+    "ApiGatewayTestApiGatewayStackCloudWatchRole5FE8AFA8": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ApiGatewayTestApiGatewayStackDeployment4341927Ff42ef7ab00a3b8a6e14fff4bc7ca76fa": Object {
+      "DependsOn": Array [
+        "ApiGatewayTestApiGatewayStackLambdaFunctionMockGET843BC4E5",
+        "ApiGatewayTestApiGatewayStackLambdaFunctionMock7B9D65BA",
+      ],
+      "Properties": Object {
+        "Description": "Automatically created by the RestApi construct",
+        "RestApiId": Object {
+          "Ref": "ApiGatewayTestApiGatewayStack5C9F3E84",
+        },
+      },
+      "Type": "AWS::ApiGateway::Deployment",
+    },
+    "ApiGatewayTestApiGatewayStackDeploymentStageprodF1D9D672": Object {
+      "Properties": Object {
+        "DeploymentId": Object {
+          "Ref": "ApiGatewayTestApiGatewayStackDeployment4341927Ff42ef7ab00a3b8a6e14fff4bc7ca76fa",
+        },
+        "RestApiId": Object {
+          "Ref": "ApiGatewayTestApiGatewayStack5C9F3E84",
+        },
+        "StageName": "prod",
+      },
+      "Type": "AWS::ApiGateway::Stage",
+    },
+    "ApiGatewayTestApiGatewayStackLambdaFunctionMock7B9D65BA": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Fn::GetAtt": Array [
+            "ApiGatewayTestApiGatewayStack5C9F3E84",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "LambdaFunctionMock",
+        "RestApiId": Object {
+          "Ref": "ApiGatewayTestApiGatewayStack5C9F3E84",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "ApiGatewayTestApiGatewayStackLambdaFunctionMockGET843BC4E5": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::ImportValue": "TestLambdaStack:ExportsOutputFnGetAttLambdaFuncTestLambdaStack2EE31B0BArn341416B9",
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "ApiGatewayTestApiGatewayStackLambdaFunctionMock7B9D65BA",
+        },
+        "RestApiId": Object {
+          "Ref": "ApiGatewayTestApiGatewayStack5C9F3E84",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ApiGatewayTestApiGatewayStackLambdaFunctionMockGETApiPermissionTestApiGatewayStackApiGatewayTestApiGatewayStack0B074A86GETLambdaFunctionMock72246C77": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::ImportValue": "TestLambdaStack:ExportsOutputFnGetAttLambdaFuncTestLambdaStack2EE31B0BArn341416B9",
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:us-east-1:1234567890a:",
+              Object {
+                "Ref": "ApiGatewayTestApiGatewayStack5C9F3E84",
+              },
+              "/",
+              Object {
+                "Ref": "ApiGatewayTestApiGatewayStackDeploymentStageprodF1D9D672",
+              },
+              "/GET/LambdaFunctionMock",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ApiGatewayTestApiGatewayStackLambdaFunctionMockGETApiPermissionTestTestApiGatewayStackApiGatewayTestApiGatewayStack0B074A86GETLambdaFunctionMockF5A3DA97": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::ImportValue": "TestLambdaStack:ExportsOutputFnGetAttLambdaFuncTestLambdaStack2EE31B0BArn341416B9",
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:us-east-1:1234567890a:",
+              Object {
+                "Ref": "ApiGatewayTestApiGatewayStack5C9F3E84",
+              },
+              "/test-invoke-stage/GET/LambdaFunctionMock",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+  },
+}
+`;

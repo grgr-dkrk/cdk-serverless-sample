@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`lambdaStack snapshot: lambdaTest 1`] = `
+Object {
+  "Parameters": Object {
+    "AssetParameterse99417ba66563098507650fbd4432a9f20f8dd9a9dced4093830a674d642af3aArtifactHash3A07462E": Object {
+      "Description": "Artifact hash for asset \\"e99417ba66563098507650fbd4432a9f20f8dd9a9dced4093830a674d642af3a\\"",
+      "Type": "String",
+    },
+    "AssetParameterse99417ba66563098507650fbd4432a9f20f8dd9a9dced4093830a674d642af3aS3Bucket1B447F69": Object {
+      "Description": "S3 bucket for asset \\"e99417ba66563098507650fbd4432a9f20f8dd9a9dced4093830a674d642af3a\\"",
+      "Type": "String",
+    },
+    "AssetParameterse99417ba66563098507650fbd4432a9f20f8dd9a9dced4093830a674d642af3aS3VersionKey2DB78F77": Object {
+      "Description": "S3 key for asset version \\"e99417ba66563098507650fbd4432a9f20f8dd9a9dced4093830a674d642af3a\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "LambdaFuncTestLambdaStack2EE31B0B": Object {
+      "DependsOn": Array [
+        "LambdaFuncTestLambdaStackServiceRole4EBB1EA0",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameterse99417ba66563098507650fbd4432a9f20f8dd9a9dced4093830a674d642af3aS3Bucket1B447F69",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameterse99417ba66563098507650fbd4432a9f20f8dd9a9dced4093830a674d642af3aS3VersionKey2DB78F77",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameterse99417ba66563098507650fbd4432a9f20f8dd9a9dced4093830a674d642af3aS3VersionKey2DB78F77",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "FunctionName": "Lambda",
+        "Handler": "index.LambdaFunctionMock",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "LambdaFuncTestLambdaStackServiceRole4EBB1EA0",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs10.x",
+        "Timeout": 10,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "LambdaFuncTestLambdaStackServiceRole4EBB1EA0": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+  },
+}
+`;
