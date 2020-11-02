@@ -1,2 +1,2 @@
 export { LambdaStack } from './lambdaStack'
-export { APIGatewayStack } from './APIGatewayStack'
+export { APIGatewayStack } from './apiGatewayStack'
